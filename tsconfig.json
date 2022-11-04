@@ -1,0 +1,18 @@
+{
+  "compilerOptions": {
+    "allowSyntheticDefaultImports": true,
+    "baseUrl": ".",
+    "downlevelIteration": true,
+    "jsx": "react",
+    "moduleResolution": "node",
+    "outDir": "./lib",
+    "strict": true,
+    "target": "es2017"
+  },
+  "exclude": [
+    "lib",
+    "node_modules",
+    "**/*.test.tsx",
+    "**/*.test.ts"
+  ]
+}

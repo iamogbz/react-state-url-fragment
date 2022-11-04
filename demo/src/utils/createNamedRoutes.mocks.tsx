@@ -1,0 +1,62 @@
+import * as React from "react";
+import { redirect, RouteObject } from "react-router-dom";
+
+import { $, $$ } from "./createNamedRoutes";
+
+export const routes: RouteObject[] = [
+  {
+    path: "/",
+    element: <div></div>,
+    children: [
+      {
+        path: "home",
+        element: <div></div>,
+        index: true,
+      },
+      {
+        path: "register",
+        loader: () => redirect("/sign/up"),
+      },
+      {
+        path: "sign",
+        index: false,
+        children: [
+          {
+            index: true,
+            element: <div></div>,
+          },
+          {
+            path: "in",
+            element: <div></div>,
+          },
+          {
+            path: "up",
+            element: <div></div>,
+          },
+        ],
+      },
+    ],
+  },
+];
+
+export const namedRoutes = {
+  "/": {
+    [$]: "/",
+    [$$]: "/home",
+    home: {
+      [$]: "/home",
+    },
+    register: {
+      [$]: "/register",
+    },
+    sign: {
+      [$]: "/sign",
+      in: {
+        [$]: "/sign/in",
+      },
+      up: {
+        [$]: "/sign/up",
+      },
+    },
+  },
+};
