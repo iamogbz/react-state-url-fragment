@@ -1,22 +1,18 @@
-import { useCallback, useEffect } from "react";
+import { useState } from "react";
 
-import { resolveTimeout } from "../../utils/resolveTimeout";
-import { useCounter } from "./useCounter";
+import { useLoop } from "./useLoop";
 
 const MAX = 100;
 const STEP = 1;
-const FREQ = 10; // ms
 let __position__ = 0;
 
 export function useCycle() {
-  const [counter, updateCounter] = useCounter();
+  const [counter, setCounter] = useState(0);
 
-  const update = useCallback(() => {
+  useLoop((elapsedTime) => {
     __position__ = (__position__ + STEP) % MAX;
-    updateCounter();
-  }, [updateCounter]);
-
-  useEffect(() => void resolveTimeout(FREQ).then(update));
+    setCounter(elapsedTime);
+  });
 
   return [__position__, MAX, counter];
 }

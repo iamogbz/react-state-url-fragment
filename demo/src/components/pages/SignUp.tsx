@@ -53,7 +53,7 @@ export function SignUp(): JSX.Element {
     <div id="sign-up" style={AUTH_CONTAINER_STYLE}>
       <h1>{Copy.SIGN_UP}</h1>
       <TextInput control={fields.username} type="email" />
-      <Link to="" onClick={onSubmit}>
+      <Link onClick={onSubmit}>
         {status.isSubmitting ? <LoadingIcon /> : Copy.SIGN_UP}
       </Link>
     </div>

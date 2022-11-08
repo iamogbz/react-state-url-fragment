@@ -1,20 +1,21 @@
-import { Dispatch, SetStateAction, useCallback, useMemo } from "react";
+import { Dispatch, SetStateAction, useCallback, useMemo, useRef } from "react";
 
-import { JSONValue, urlDecode, urlEncode } from "../utils";
+import { urlDecode, urlEncode } from "../utils";
 
-export type UseUrlStateResult<T extends JSONValue> = [
+export type UseUrlStateResult<T> = [
   T | null,
   Dispatch<SetStateAction<T | null>>
 ];
 
-export function useUrlState<T extends JSONValue>(props: {
+export function useUrlState<T>(props: {
   setLocationHash(urlEncodedState: string): void;
   getLocationHash(): string;
   handleDecodeError?(urlEncodedState: string): T;
 }): UseUrlStateResult<T> {
   const { getLocationHash, handleDecodeError, setLocationHash } = props;
 
-  const state = useMemo(() => {
+  const state = useRef<T | null>(null);
+  state.current = useMemo(() => {
     const encodedState = getLocationHash();
     try {
       return urlDecode<T>(encodedState);
@@ -23,17 +24,17 @@ export function useUrlState<T extends JSONValue>(props: {
     }
   }, [getLocationHash, handleDecodeError]);
 
-  const setState: UseUrlStateResult<T | null>[1] = useCallback(
+  const setState: UseUrlStateResult<T>[1] = useCallback(
     function setState(nextStateAction) {
       const newState =
-        typeof nextStateAction === "function"
-          ? nextStateAction(state)
+        nextStateAction instanceof Function
+          ? nextStateAction(state.current)
           : nextStateAction;
       const hash = urlEncode(newState);
       setLocationHash(hash);
     },
-    [setLocationHash, state]
+    [setLocationHash]
   );
 
-  return [state, setState];
+  return [state.current, setState];
 }

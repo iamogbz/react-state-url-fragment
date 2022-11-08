@@ -10,11 +10,11 @@ export interface JSONObject {
 }
 export type JSONArray = Array<JSONValue>;
 
-export function urlEncode<T extends JSONValue>(state: T): string {
+export function urlEncode<T>(state: T): string {
   return encodeURIComponent(btoa(JSON.stringify(state)));
 }
 
-export function urlDecode<T extends JSONValue>(encoded: string): T {
+export function urlDecode<T = JSONValue>(encoded: string): T {
   return JSON.parse(atob(decodeURIComponent(encoded)));
 }
 

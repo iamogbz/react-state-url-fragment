@@ -16,7 +16,6 @@ export const routes: RouteObject[] = [
     element: <Base />,
     children: [
       {
-        path: "home",
         element: <Landing />,
         index: true,
       },

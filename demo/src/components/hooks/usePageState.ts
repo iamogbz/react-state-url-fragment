@@ -5,16 +5,16 @@ type PageState = {
   username?: string;
 };
 
-export function usePageState(
-  defaultState?: PageState
-): UseUrlStateResult<PageState> {
+export function usePageState<T = PageState>(
+  defaultState?: T
+): UseUrlStateResult<T> {
   const getLocationHash = useCallback(() => location.hash.substring(1), []);
   const setLocationHash = useCallback((hash: string) => {
     location.hash = hash;
   }, []);
   const handleDecodeError = defaultState && (() => defaultState);
 
-  return useUrlState<PageState>({
+  return useUrlState<T>({
     getLocationHash,
     handleDecodeError,
     setLocationHash,

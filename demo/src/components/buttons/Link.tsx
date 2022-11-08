@@ -6,8 +6,17 @@ import {
 
 import { BUTTON_BASE_STYLE } from "./constants";
 
-type LinkProps = React.PropsWithChildren<ReactRouterDomLinkProps>;
+type LinkProps = React.PropsWithChildren<
+  Omit<ReactRouterDomLinkProps, "to"> &
+    Partial<Pick<ReactRouterDomLinkProps, "to">>
+>;
 
 export function Link(props: LinkProps) {
-  return <ReactRouterDomLink style={BUTTON_BASE_STYLE} {...props} />;
+  return (
+    <ReactRouterDomLink
+      to={props.to ?? "#"}
+      style={BUTTON_BASE_STYLE}
+      {...props}
+    />
+  );
 }

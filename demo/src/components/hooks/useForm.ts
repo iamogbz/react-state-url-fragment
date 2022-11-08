@@ -1,10 +1,7 @@
 import { useCallback, useState } from "react";
 
+import { ObjectEntry } from "../../utils/object";
 import { useCounter } from "./useCounter";
-
-type ObjectEntry<T extends Record<string, unknown>> = {
-  [k in keyof T]: [k, T[k]];
-}[string];
 
 type SimpleFormFields = Record<string, unknown>;
 const Value = Symbol("__value__");

@@ -56,7 +56,7 @@ export function SignIn(): JSX.Element {
       <h1>{Copy.SIGN_IN}</h1>
       <TextInput control={fields.username} />
       <TextInput control={fields.password} type="password" />
-      <Link to="" onClick={onSubmit}>
+      <Link onClick={onSubmit}>
         {status.isSubmitting ? <LoadingIcon /> : Copy.SIGN_IN}
       </Link>
     </div>

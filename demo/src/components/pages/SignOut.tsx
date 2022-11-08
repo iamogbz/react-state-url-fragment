@@ -12,15 +12,17 @@ import { LoadingIcon } from "../icons/LoadingIcon";
 import { AUTH_CONTAINER_STYLE } from "./constants";
 
 export function SignOut(): JSX.Element {
+  const homeLink = namedRoutes["/"][$];
   const accountLink = namedRoutes["/"].account[$];
+
   const navigate = useNavigate();
   const [, setAuthState] = useAuthState();
 
   const doSignOut = React.useCallback(() => {
     setAuthState({});
-    accountLink && navigate(accountLink);
+    homeLink && navigate(homeLink);
     return { success: true };
-  }, [accountLink, navigate, setAuthState]);
+  }, [homeLink, navigate, setAuthState]);
 
   const { actions, status } = useSimpleForm(
     {},
@@ -40,7 +42,7 @@ export function SignOut(): JSX.Element {
     <div id="sign-out" style={AUTH_CONTAINER_STYLE}>
       <h1>{Copy.SIGN_OUT_CONFIRM}</h1>
       <div style={{ display: "inline-flex" }}>
-        <Link to="" onClick={onSubmit}>
+        <Link onClick={onSubmit}>
           {status.isSubmitting ? <LoadingIcon /> : Copy.YES}
         </Link>
         {accountLink && (
