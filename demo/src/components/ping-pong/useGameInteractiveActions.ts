@@ -2,9 +2,7 @@ import { useCallback, useEffect, useRef, useState } from "react";
 
 import { ActionType, GameActions, GameKey, Inset } from "./constants";
 
-export function useGameInteractiveActions(
-  gameElem?: DocumentAndElementEventHandlers
-) {
+export function useGameInteractiveActions(gameElem?: HTMLElement) {
   const actions = useRef<GameActions[]>([]);
 
   const popActions = useCallback(function popActions() {
@@ -19,9 +17,13 @@ export function useGameInteractiveActions(
   const spaceKeyStatus = useKeyStatus(GameKey.SPACE, gameElem);
   const leftKeyStatus = useKeyStatus(GameKey.ARROW_LEFT, gameElem);
   const rightKeyStatus = useKeyStatus(GameKey.ARROW_RIGHT, gameElem);
+  const mouseCursorStatus = useMouseStatus(gameElem);
 
   useEffect(() => {
-    if (rightKeyStatus.down) {
+    if (
+      rightKeyStatus.down ||
+      (mouseCursorStatus.direction > 0 && mouseCursorStatus.down)
+    ) {
       pushActions(
         {
           type: ActionType.USR_MOVE,
@@ -29,7 +31,10 @@ export function useGameInteractiveActions(
         },
         { type: ActionType.CPU_MOVE }
       );
-    } else if (leftKeyStatus.down) {
+    } else if (
+      leftKeyStatus.down ||
+      (mouseCursorStatus.direction < 0 && mouseCursorStatus.down)
+    ) {
       pushActions(
         {
           type: ActionType.USR_MOVE,
@@ -50,15 +55,18 @@ export function useGameInteractiveActions(
   return [pushActions, popActions] as const;
 }
 
-const INITIAL_STATUS = {
+const INITIAL_KEY_STATUS = {
   down: 0,
   length: 0,
 };
+
 function useKeyStatus(
   gameKey: GameKey,
   gameElem?: DocumentAndElementEventHandlers
 ) {
-  const [status, setStatus] = useState(INITIAL_STATUS);
+  const [status, setStatus] = useState(INITIAL_KEY_STATUS);
+
+  const reset = useCallback(() => setStatus(INITIAL_KEY_STATUS), []);
 
   const handleKeyDown = useCallback(
     function handleKeyDown(this: HTMLElement, e: Event) {
@@ -84,17 +92,77 @@ function useKeyStatus(
     [gameKey]
   );
 
-  const reset = useCallback(() => setStatus(INITIAL_STATUS), []);
-
-  useEffect(() => {
-    if (!gameElem) return;
-    gameElem.addEventListener("keydown", handleKeyDown);
-    gameElem.addEventListener("keyup", handleKeyUp);
-    return () => {
-      gameElem.removeEventListener("keydown", handleKeyDown);
-      gameElem.removeEventListener("keyup", handleKeyUp);
-    };
-  }, [gameElem, handleKeyDown, handleKeyUp]);
+  useEventListeners(gameElem, [
+    ["keyup", handleKeyUp],
+    ["keydown", handleKeyDown],
+  ]);
 
   return { ...status, reset };
+}
+
+const INITIAL_MOUSE_STATUS = {
+  x: 0,
+  y: 0,
+  relative: { x: 0, y: 0 },
+  direction: 0,
+  down: false,
+};
+
+function useMouseStatus(gameElem?: HTMLElement) {
+  const [status, setStatus] = useState(INITIAL_MOUSE_STATUS);
+  const gameStageBounds =
+    (gameElem ?? document.body).getClientRects().item(0) ?? new DOMRect();
+
+  const handleMouseMove = useCallback(
+    function handleMouseMove(this: HTMLElement, e: Event) {
+      const { clientX, clientY } = e as HTMLElementEventMap["mousemove"];
+      const relative = {
+        x: clientX - gameStageBounds.x,
+        y: clientY - gameStageBounds.y,
+      };
+      setStatus((status) => ({
+        ...status,
+        direction: relative.x - gameStageBounds.width / 2,
+        relative,
+        x: clientX,
+        y: clientY,
+      }));
+    },
+    [gameStageBounds.width, gameStageBounds.x, gameStageBounds.y]
+  );
+
+  const handleMouseDown = useCallback(function handleMouseDown() {
+    setStatus((status) => ({ ...status, down: true }));
+  }, []);
+  const handleMouseUp = useCallback(function handleMouseUp() {
+    setStatus((status) => ({ ...status, down: false }));
+  }, []);
+
+  useEventListeners(gameElem, [
+    ["mousemove", handleMouseMove],
+    ["mousedown", handleMouseDown],
+    ["mouseup", handleMouseUp],
+  ]);
+
+  return status;
+}
+
+function useEventListeners(
+  elem?: DocumentAndElementEventHandlers,
+  eventHandlers: [
+    keyof HTMLElementEventMap,
+    Parameters<DocumentAndElementEventHandlers["addEventListener"]>[1]
+  ][] = []
+) {
+  useEffect(() => {
+    if (!elem) return;
+    eventHandlers.forEach(([eventName, handler]) =>
+      elem.addEventListener(eventName, handler)
+    );
+    return () => {
+      eventHandlers.forEach(([eventName, handler]) =>
+        elem.removeEventListener(eventName, handler)
+      );
+    };
+  });
 }

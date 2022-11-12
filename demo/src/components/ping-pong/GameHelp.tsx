@@ -1,5 +1,11 @@
 import React from "react";
 
+const Controls = {
+  ESC: "Reset Game",
+  "LEFT/RIGHT": "Move Paddle",
+  SPACE: "Play/Pause",
+};
+
 export function GameHelp() {
   return (
     <table
@@ -15,16 +21,13 @@ export function GameHelp() {
       }}
     >
       <tbody>
-        <tr>
-          <td>SPACE</td>
-          <td>:</td>
-          <td>Play/Pause</td>
-        </tr>
-        <tr>
-          <td>ESC</td>
-          <td>:</td>
-          <td>Reset Game</td>
-        </tr>
+        {Object.entries(Controls).map(([key, action]) => (
+          <tr key={key}>
+            <td>{key}</td>
+            <td>:</td>
+            <td>{action}</td>
+          </tr>
+        ))}
       </tbody>
     </table>
   );
