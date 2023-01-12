@@ -27,8 +27,8 @@ export function useUrlState<T>(props: {
   const setState: UseUrlStateResult<T>[1] = useCallback(
     function setState(nextStateAction) {
       const newState =
-        nextStateAction instanceof Function
-          ? nextStateAction(state.current)
+        typeof nextStateAction === "function"
+          ? (nextStateAction as CallableFunction)(state.current)
           : nextStateAction;
       const hash = urlEncode(newState);
       setLocationHash(hash);

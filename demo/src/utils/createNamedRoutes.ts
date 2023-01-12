@@ -93,15 +93,10 @@ function splitPath(path: string): string[] {
     const segments = path.split(DELIMITER_URL_PATH);
     while (segments.length) {
       const next = segments.shift();
-      if (!next) {
-        if (staged) {
-          yield `${staged}${DELIMITER_URL_PATH}`;
-        }
-        // staged = "";
-      } else {
-        if (staged) {
-          yield staged;
-        }
+      if (staged) {
+        yield staged;
+      }
+      if (next) {
         staged = next;
       }
     }

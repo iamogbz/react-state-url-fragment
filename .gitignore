@@ -1,2 +1,4 @@
-lib/
+coverage/
 demo/build/
+lib/
+node_modules/

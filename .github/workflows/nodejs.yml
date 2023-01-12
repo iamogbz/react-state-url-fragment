@@ -1,0 +1,54 @@
+name: Build
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [14.x, 16.x, 18.x]
+
+    steps:
+    - uses: actions/checkout@v1
+    - name: Setup
+      uses: actions/setup-node@v1
+      with:
+        node-version: ${{ matrix.node-version }}
+    - name: Install
+      uses: pnpm/action-setup@v2.2.1
+      with:
+        version: 7
+        run_install: |
+            args: [--no-frozen-lockfile]
+    - name: Lint
+      run: |
+        pnpm lint
+    - name: Test
+      env:
+        CI: true
+      run: |
+        pnpm test -- --ci --coverage
+    - name: Report
+      if: github.actor != 'dependabot[bot]' && github.actor != 'dependabot-preview[bot]'
+      env:
+        COVERALLS_GIT_BRANCH: ${{ github.ref }}
+        COVERALLS_REPO_TOKEN: ${{ secrets.COVERALLS_REPO_TOKEN }}
+      run: |
+        pnpm coveralls
+    - name: Build
+      run: |
+        pnpm build
+    - name: Deploy
+      if: matrix.node-version == '18.x' && github.ref == 'refs/heads/main' && github.actor != 'dependabot[bot]' && github.actor != 'dependabot-preview[bot]'
+      env:
+        GH_TOKEN: ${{ secrets.GH_TOKEN }}
+        NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+      run: |
+        pnpm release

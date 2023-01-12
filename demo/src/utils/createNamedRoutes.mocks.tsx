@@ -5,6 +5,18 @@ import { $, $$ } from "./createNamedRoutes";
 
 export const routes: RouteObject[] = [
   {
+    element: <div></div>,
+    children: [
+      {
+        index: true,
+        element: <div></div>,
+      },
+      {
+        element: <div></div>,
+      },
+    ],
+  },
+  {
     path: "/",
     element: <div></div>,
     children: [
