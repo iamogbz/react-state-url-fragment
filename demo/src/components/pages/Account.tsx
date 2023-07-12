@@ -18,10 +18,10 @@ export function Account() {
     ? Copy.WELCOME_BACK(pageState.username)
     : Copy.WELCOME;
 
-  const homeLink = namedRoutes["/"][$];
-  const signInLink = namedRoutes["/"].sign.in[$];
-  const signUpLink = namedRoutes["/"].sign.up[$];
-  const signOutLink = namedRoutes["/"].sign.out[$];
+  const homeLink = namedRoutes[$];
+  const signInLink = namedRoutes.sign.in[$];
+  const signUpLink = namedRoutes.sign.up[$];
+  const signOutLink = namedRoutes.sign.out[$];
 
   return (
     <div id="sign" style={AUTH_CONTAINER_STYLE}>

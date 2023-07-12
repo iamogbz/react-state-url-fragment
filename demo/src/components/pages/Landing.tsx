@@ -8,7 +8,7 @@ import { PingPong } from "../ping-pong/PingPong";
 import { AUTH_CONTAINER_STYLE } from "./constants";
 
 export function Landing(): JSX.Element {
-  const accountLink = namedRoutes["/"].account[$];
+  const accountLink = namedRoutes.account[$];
   return (
     <div id="landing" style={AUTH_CONTAINER_STYLE}>
       <h1>{document.title}</h1>

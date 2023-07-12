@@ -19,7 +19,7 @@ import { GameStatus } from "./GameStatus";
 import { gameStateActions } from "./helpers";
 import { useGameInteractiveActions } from "./useGameInteractiveActions";
 
-const UPDATE_PAGE_GAME_STATE_INTERVAL = 5 * 1000; // 5s
+const UPDATE_PAGE_GAME_STATE_INTERVAL = 0.5 * 1000; // every half second
 
 export function PingPong() {
   const [pageGameState, setPageGameState] = usePageState(INITIAL_GAME_STATE);

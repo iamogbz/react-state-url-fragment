@@ -7,12 +7,16 @@ import { Landing } from "./components/pages/Landing";
 import { SignIn } from "./components/pages/SignIn";
 import { SignOut } from "./components/pages/SignOut";
 import { SignUp } from "./components/pages/SignUp";
-import { createNamedRoutes, NamedRoute } from "./utils/createNamedRoutes";
+import { $, createNamedRoutes, NamedRoute } from "./utils/createNamedRoutes";
 
+export const ROOT_PATH = "/";
+export const BASE_PATH = "react-state-url-fragment";
+
+const home = ROOT_PATH + BASE_PATH;
 export const namedRoutes: NamedRoute = {};
 export const routes: RouteObject[] = [
   {
-    path: "/",
+    path: home,
     element: <Base />,
     children: [
       {
@@ -28,7 +32,7 @@ export const routes: RouteObject[] = [
         children: [
           {
             index: true,
-            loader: () => redirect("/account"),
+            loader: () => redirect(namedRoutes.account[$] ?? home),
           },
           {
             path: "in",
@@ -48,6 +52,6 @@ export const routes: RouteObject[] = [
   },
 ];
 
-Object.assign(namedRoutes, createNamedRoutes(routes));
+Object.assign(namedRoutes, createNamedRoutes(routes)[ROOT_PATH][BASE_PATH]);
 
 export const router = createBrowserRouter(routes);
