@@ -28,9 +28,10 @@ export function usePageState<T>(defaultState?: T) {
 ```
 
 ### Example
+
 <https://github.com/iamogbz/react-state-url-fragment/blob/93b12c825e0ea4975f6b05544a56b7af5826984e/demo/src/components/hooks/usePageState.ts#L1-L22>
 
-### Demo
+### [Demo][homepage]
 
 ```sh
 $ cd demo/
@@ -38,3 +39,8 @@ $ make start
 
 Starting the development server...
 ```
+
+Check it out [here][homepage]
+
+<!-- links -->
+[homepage]: https://ogbizi.com/react-state-url-fragment
