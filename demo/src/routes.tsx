@@ -10,13 +10,13 @@ import { SignUp } from "./components/pages/SignUp";
 import { $, createNamedRoutes, NamedRoute } from "./utils/createNamedRoutes";
 
 export const ROOT_PATH = "/";
-export const BASE_PATH = "react-state-url-fragment";
+export const BASE_NAME = "react-state-url-fragment";
 
-const home = ROOT_PATH + BASE_PATH;
+const homePath = ROOT_PATH + BASE_NAME;
 export const namedRoutes: NamedRoute = {};
 export const routes: RouteObject[] = [
   {
-    path: home,
+    path: homePath,
     element: <Base />,
     children: [
       {
@@ -32,7 +32,7 @@ export const routes: RouteObject[] = [
         children: [
           {
             index: true,
-            loader: () => redirect(namedRoutes.account[$] ?? home),
+            loader: () => redirect(namedRoutes.account[$] ?? homePath),
           },
           {
             path: "in",
@@ -52,6 +52,6 @@ export const routes: RouteObject[] = [
   },
 ];
 
-Object.assign(namedRoutes, createNamedRoutes(routes)[ROOT_PATH][BASE_PATH]);
+Object.assign(namedRoutes, createNamedRoutes(routes)[ROOT_PATH][BASE_NAME]);
 
 export const router = createBrowserRouter(routes);
