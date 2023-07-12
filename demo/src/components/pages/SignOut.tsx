@@ -12,8 +12,8 @@ import { LoadingIcon } from "../icons/LoadingIcon";
 import { AUTH_CONTAINER_STYLE } from "./constants";
 
 export function SignOut(): JSX.Element {
-  const homeLink = namedRoutes["/"][$];
-  const accountLink = namedRoutes["/"].account[$];
+  const homeLink = namedRoutes[$];
+  const accountLink = namedRoutes.account[$];
 
   const navigate = useNavigate();
   const [, setAuthState] = useAuthState();

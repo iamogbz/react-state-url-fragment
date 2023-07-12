@@ -14,7 +14,7 @@ import { LoadingIcon } from "../icons/LoadingIcon";
 import { AUTH_CONTAINER_STYLE } from "./constants";
 
 export function SignIn(): JSX.Element {
-  const accountLink = namedRoutes["/"].account[$];
+  const accountLink = namedRoutes.account[$];
   const navigate = useNavigate();
   const [, setAuthState] = useAuthState();
   const [pageState, setPageState] = usePageState();
