@@ -1,6 +1,6 @@
 export const Copy = {
-  GAME_RUNNING: "PLAYING",
-  GAME_PAUSED: "[[ PAUSED ]]",
+  GAME_RUNNING: "[[ STOP/PAUSE GAME ]]",
+  GAME_PAUSED: "[[ START/PLAY GAME ]]",
   HELLO: (name: string) => `Hello ${name}!`,
   NO: "No!",
   SIGN_OUT: "Sign Out!",

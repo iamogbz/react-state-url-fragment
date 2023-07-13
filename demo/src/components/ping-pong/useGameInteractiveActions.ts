@@ -113,9 +113,8 @@ function useMouseStatus(gameElem?: HTMLElement) {
   const gameStageBounds =
     (gameElem ?? document.body).getClientRects().item(0) ?? new DOMRect();
 
-  const handleMouseMove = useCallback(
-    function handleMouseMove(this: HTMLElement, e: Event) {
-      const { clientX, clientY } = e as HTMLElementEventMap["mousemove"];
+  const handleMove = useCallback(
+    function handleMove(clientX: number, clientY: number) {
       const relative = {
         x: clientX - gameStageBounds.x,
         y: clientY - gameStageBounds.y,
@@ -131,17 +130,38 @@ function useMouseStatus(gameElem?: HTMLElement) {
     [gameStageBounds.width, gameStageBounds.x, gameStageBounds.y]
   );
 
+  const handleMouseMove = useCallback(
+    function handleMouseMove(this: HTMLElement, e: Event) {
+      const { clientX, clientY } = e as HTMLElementEventMap["mousemove"];
+      handleMove(clientX, clientY);
+    },
+    [handleMove]
+  );
+
+  const handleTouchMove = useCallback(
+    function handleTouchMove(this: HTMLElement, e: Event) {
+      const { clientX, clientY } = (e as HTMLElementEventMap["touchmove"])
+        .touches[0];
+      handleMove(clientX, clientY);
+    },
+    [handleMove]
+  );
+
   const handleMouseDown = useCallback(function handleMouseDown() {
-    setStatus((status) => ({ ...status, down: true }));
+    setStatus((status) => ({ ...status, direction: 0, down: true }));
   }, []);
   const handleMouseUp = useCallback(function handleMouseUp() {
-    setStatus((status) => ({ ...status, down: false }));
+    setStatus((status) => ({ ...status, direction: 0, down: false }));
   }, []);
 
   useEventListeners(gameElem, [
     ["mousemove", handleMouseMove],
     ["mousedown", handleMouseDown],
     ["mouseup", handleMouseUp],
+    ["touchmove", handleTouchMove],
+    ["touchstart", handleMouseDown],
+    ["touchend", handleMouseUp],
+    ["touchcancel", handleMouseUp],
   ]);
 
   return status;

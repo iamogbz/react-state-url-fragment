@@ -6,6 +6,7 @@ import { useThrottle } from "../hooks/useThrottle";
 import { AUTH_CONTAINER_STYLE } from "../pages/constants";
 import { Board } from "./Board";
 import {
+  ActionType,
   CPU_POSITION_Y,
   Game,
   GameActions,
@@ -39,6 +40,11 @@ export function PingPong() {
 
   const [pushGameActions, popGameActions] = useGameInteractiveActions(
     document.getElementsByTagName("html")[0]
+  );
+
+  const togglePlayPause = useCallback(
+    () => pushGameActions({ type: ActionType.GAME_PLAY_PAUSE }),
+    [pushGameActions]
   );
 
   const step = useCallback(
@@ -84,7 +90,7 @@ export function PingPong() {
           />
         ))}
       </Board>
-      <GameStatus game={game.current} />
+      <GameStatus game={game.current} togglePlayPause={togglePlayPause} />
       <GameHelp />
     </div>
   );

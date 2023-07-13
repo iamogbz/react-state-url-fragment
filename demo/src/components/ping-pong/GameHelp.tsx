@@ -18,6 +18,7 @@ export function GameHelp() {
         border: "solid 2px black",
         padding: "8px",
         borderRadius: "8px",
+        userSelect: "none",
       }}
     >
       <tbody>
