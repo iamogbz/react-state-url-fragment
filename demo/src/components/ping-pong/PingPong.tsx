@@ -38,7 +38,7 @@ export function PingPong() {
   useEffect(() => updatePageGameState());
 
   const [pushGameActions, popGameActions] = useGameInteractiveActions(
-    document.body
+    document.getElementsByTagName("html")[0]
   );
 
   const step = useCallback(
