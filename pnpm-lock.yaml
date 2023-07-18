@@ -103,7 +103,7 @@ devDependencies:
     version: 6.14.1(react@18.2.0)
   react-router-dom:
     specifier: ^6.4.3
-    version: 6.14.1(react-dom@18.2.0)(react@18.2.0)
+    version: 6.14.2(react-dom@18.2.0)(react@18.2.0)
   react-scripts:
     specifier: ^5.0.1
     version: 5.0.1(@babel/plugin-syntax-flow@7.22.5)(@babel/plugin-transform-react-jsx@7.22.5)(eslint@8.45.0)(react@18.2.0)(ts-node@10.9.1)(typescript@4.9.5)
@@ -2642,6 +2642,11 @@ packages:
 
   /@remix-run/router@1.7.1:
     resolution: {integrity: sha512-bgVQM4ZJ2u2CM8k1ey70o1ePFXsEzYVZoWghh6WjM8p59jQ7HxzbHW4SbnWFG7V9ig9chLawQxDTZ3xzOF8MkQ==}
+    engines: {node: '>=14'}
+    dev: true
+
+  /@remix-run/router@1.7.2:
+    resolution: {integrity: sha512-7Lcn7IqGMV+vizMPoEl5F0XDshcdDYtMI6uJLQdQz5CfZAwy3vvGKYSUk789qndt5dEC4HfSjviSYlSoHGL2+A==}
     engines: {node: '>=14'}
     dev: true
 
@@ -11700,17 +11705,17 @@ packages:
     engines: {node: '>=0.10.0'}
     dev: true
 
-  /react-router-dom@6.14.1(react-dom@18.2.0)(react@18.2.0):
-    resolution: {integrity: sha512-ssF6M5UkQjHK70fgukCJyjlda0Dgono2QGwqGvuk7D+EDGHdacEN3Yke2LTMjkrpHuFwBfDFsEjGVXBDmL+bWw==}
+  /react-router-dom@6.14.2(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-5pWX0jdKR48XFZBuJqHosX3AAHjRAzygouMTyimnBPOLdY3WjzUSKhus2FVMihUFWzeLebDgr4r8UeQFAct7Bg==}
     engines: {node: '>=14'}
     peerDependencies:
       react: '>=16.8'
       react-dom: '>=16.8'
     dependencies:
-      '@remix-run/router': 1.7.1
+      '@remix-run/router': 1.7.2
       react: 18.2.0
       react-dom: 18.2.0(react@18.2.0)
-      react-router: 6.14.1(react@18.2.0)
+      react-router: 6.14.2(react@18.2.0)
     dev: true
 
   /react-router@6.14.1(react@18.2.0):
@@ -11720,6 +11725,16 @@ packages:
       react: '>=16.8'
     dependencies:
       '@remix-run/router': 1.7.1
+      react: 18.2.0
+    dev: true
+
+  /react-router@6.14.2(react@18.2.0):
+    resolution: {integrity: sha512-09Zss2dE2z+T1D03IheqAFtK4UzQyX8nFPWx6jkwdYzGLXd5ie06A6ezS2fO6zJfEb/SpG6UocN2O1hfD+2urQ==}
+    engines: {node: '>=14'}
+    peerDependencies:
+      react: '>=16.8'
+    dependencies:
+      '@remix-run/router': 1.7.2
       react: 18.2.0
     dev: true
 
