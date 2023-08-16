@@ -4,7 +4,7 @@ import { urlDecode, urlEncode } from "../utils";
 
 export type UseUrlStateResult<T> = [
   T | null,
-  Dispatch<SetStateAction<T | null>>
+  Dispatch<SetStateAction<T | null>>,
 ];
 
 export function useUrlState<T>(props: {
@@ -33,7 +33,7 @@ export function useUrlState<T>(props: {
       const hash = urlEncode(newState);
       setLocationHash(hash);
     },
-    [setLocationHash]
+    [setLocationHash],
   );
 
   return [state.current, setState];

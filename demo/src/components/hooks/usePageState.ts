@@ -6,7 +6,7 @@ type PageState = {
 };
 
 export function usePageState<T = PageState>(
-  defaultState?: T
+  defaultState?: T,
 ): UseUrlStateResult<T> {
   const getLocationHash = useCallback(() => location.hash.substring(1), []);
   const setLocationHash = useCallback((hash: string) => {

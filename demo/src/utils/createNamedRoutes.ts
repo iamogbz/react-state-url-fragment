@@ -56,7 +56,7 @@ export function createNamedRoutes(routes: RouteObject[]): NamedRoute {
 
 function flattenRoutes(
   routes: RouteObject[],
-  path?: string
+  path?: string,
 ): [string[], Set<string>] {
   const flattenedRoutes = Array.from<string>([]);
   const indexedRoutes = new Set<string>();
@@ -74,7 +74,7 @@ function flattenRoutes(
 
 function flattenRoute(
   route: RouteObject,
-  path?: string
+  path?: string,
 ): [string[], Set<string>] {
   const [flattenedRoutes, indexedRoutes] = route.children
     ? flattenRoutes(route.children, path)

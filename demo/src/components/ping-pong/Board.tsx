@@ -6,7 +6,7 @@ export function Board(
   p: React.DetailedHTMLProps<
     React.HTMLAttributes<HTMLDivElement>,
     HTMLDivElement
-  >
+  >,
 ) {
   return (
     <div

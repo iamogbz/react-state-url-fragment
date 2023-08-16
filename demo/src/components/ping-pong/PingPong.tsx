@@ -30,7 +30,7 @@ export function PingPong() {
 
   const bulkDispatch = useCallback(
     (...actions: GameActions[]) => actions.forEach(singleDispatch),
-    [singleDispatch]
+    [singleDispatch],
   );
 
   const updatePageGameState = useThrottle(() => {
@@ -39,12 +39,12 @@ export function PingPong() {
   useEffect(() => updatePageGameState());
 
   const [pushGameActions, popGameActions] = useGameInteractiveActions(
-    document.getElementsByTagName("html")[0]
+    document.getElementsByTagName("html")[0],
   );
 
   const togglePlayPause = useCallback(
     () => pushGameActions({ type: ActionType.GAME_PLAY_PAUSE }),
-    [pushGameActions]
+    [pushGameActions],
   );
 
   const step = useCallback(
@@ -54,7 +54,7 @@ export function PingPong() {
       pushGameActions(...gameStateActions(game.current));
       bulkDispatch(...popGameActions());
     },
-    [bulkDispatch, popGameActions, pushGameActions]
+    [bulkDispatch, popGameActions, pushGameActions],
   );
 
   useLoop(step);

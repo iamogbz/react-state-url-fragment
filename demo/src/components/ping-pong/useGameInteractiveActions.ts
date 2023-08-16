@@ -29,7 +29,7 @@ export function useGameInteractiveActions(gameElem?: HTMLElement) {
           type: ActionType.USR_MOVE,
           payload: Inset.RIGHT,
         },
-        { type: ActionType.CPU_MOVE }
+        { type: ActionType.CPU_MOVE },
       );
     } else if (
       leftKeyStatus.down ||
@@ -40,7 +40,7 @@ export function useGameInteractiveActions(gameElem?: HTMLElement) {
           type: ActionType.USR_MOVE,
           payload: Inset.LEFT,
         },
-        { type: ActionType.CPU_MOVE }
+        { type: ActionType.CPU_MOVE },
       );
     } else if (spaceKeyStatus.down) {
       spaceKeyStatus.reset();
@@ -62,7 +62,7 @@ const INITIAL_KEY_STATUS = {
 
 function useKeyStatus(
   gameKey: GameKey,
-  gameElem?: DocumentAndElementEventHandlers
+  gameElem?: DocumentAndElementEventHandlers,
 ) {
   const [status, setStatus] = useState(INITIAL_KEY_STATUS);
 
@@ -79,7 +79,7 @@ function useKeyStatus(
         });
       }
     },
-    [gameKey]
+    [gameKey],
   );
 
   const handleKeyUp = useCallback(
@@ -89,7 +89,7 @@ function useKeyStatus(
         setStatus((status) => ({ ...status, down: 0 }));
       }
     },
-    [gameKey]
+    [gameKey],
   );
 
   useEventListeners(gameElem, [
@@ -127,7 +127,7 @@ function useMouseStatus(gameElem?: HTMLElement) {
         y: clientY,
       }));
     },
-    [gameStageBounds.width, gameStageBounds.x, gameStageBounds.y]
+    [gameStageBounds.width, gameStageBounds.x, gameStageBounds.y],
   );
 
   const handleMouseMove = useCallback(
@@ -135,7 +135,7 @@ function useMouseStatus(gameElem?: HTMLElement) {
       const { clientX, clientY } = e as HTMLElementEventMap["mousemove"];
       handleMove(clientX, clientY);
     },
-    [handleMove]
+    [handleMove],
   );
 
   const handleTouchMove = useCallback(
@@ -144,7 +144,7 @@ function useMouseStatus(gameElem?: HTMLElement) {
         .touches[0];
       handleMove(clientX, clientY);
     },
-    [handleMove]
+    [handleMove],
   );
 
   const handleMouseDown = useCallback(function handleMouseDown() {
@@ -171,17 +171,17 @@ function useEventListeners(
   elem?: DocumentAndElementEventHandlers,
   eventHandlers: [
     keyof HTMLElementEventMap,
-    Parameters<DocumentAndElementEventHandlers["addEventListener"]>[1]
-  ][] = []
+    Parameters<DocumentAndElementEventHandlers["addEventListener"]>[1],
+  ][] = [],
 ) {
   useEffect(() => {
     if (!elem) return;
     eventHandlers.forEach(([eventName, handler]) =>
-      elem.addEventListener(eventName, handler)
+      elem.addEventListener(eventName, handler),
     );
     return () => {
       eventHandlers.forEach(([eventName, handler]) =>
-        elem.removeEventListener(eventName, handler)
+        elem.removeEventListener(eventName, handler),
       );
     };
   });

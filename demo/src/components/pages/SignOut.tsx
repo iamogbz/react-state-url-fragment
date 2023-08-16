@@ -26,7 +26,7 @@ export function SignOut(): JSX.Element {
 
   const { actions, status } = useSimpleForm(
     {},
-    { submit: () => resolveTimeout(1000).then(doSignOut) }
+    { submit: () => resolveTimeout(1000).then(doSignOut) },
   );
 
   const onSubmit = React.useCallback(
@@ -35,7 +35,7 @@ export function SignOut(): JSX.Element {
       if (status.isSubmitting) return;
       actions.submit();
     },
-    [status.isSubmitting, actions]
+    [status.isSubmitting, actions],
   );
 
   return (

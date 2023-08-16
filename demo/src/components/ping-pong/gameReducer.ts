@@ -15,16 +15,16 @@ import { didPaddleHitBall } from "./helpers";
 
 type ReducerActionHandler<T extends ActionType> = (
   gameState: Game,
-  action: Extract<GameActions, { type: T }>
+  action: Extract<GameActions, { type: T }>,
 ) => Game;
 
 const handleGameStep: ReducerActionHandler<ActionType.GAME_STEP> = (
-  gameState
+  gameState,
 ) => gameState;
 
 const handleGamePlayPause: ReducerActionHandler<ActionType.GAME_PLAY_PAUSE> = (
   gameState,
-  action
+  action,
 ) => ({
   ...gameState,
   isRunning: action.payload ?? !gameState.isRunning,
@@ -35,7 +35,7 @@ const handleGameReset: ReducerActionHandler<ActionType.GAME_RESET> = () =>
 
 const handleBallHit: ReducerActionHandler<ActionType.BALL_HIT> = (
   gameState,
-  action
+  action,
 ) =>
   gameState.isRunning
     ? {
@@ -61,7 +61,7 @@ const handleBallHit: ReducerActionHandler<ActionType.BALL_HIT> = (
 
 const handleBallMove: ReducerActionHandler<ActionType.BALL_MOVE> = (
   gameState,
-  action
+  action,
 ) =>
   gameState.isRunning
     ? {
@@ -71,20 +71,20 @@ const handleBallMove: ReducerActionHandler<ActionType.BALL_MOVE> = (
             action.payload?.x ??
               gameState.ballPosition.x + gameState.ballVelocity.x,
             0,
-            1
+            1,
           ),
           y: clamp(
             action.payload?.y ??
               gameState.ballPosition.y + gameState.ballVelocity.y,
             0,
-            1
+            1,
           ),
         },
       }
     : gameState;
 
 const handleCpuMove: ReducerActionHandler<ActionType.CPU_MOVE> = (
-  gameState
+  gameState,
 ) => {
   if (!gameState.isRunning) return gameState;
 
@@ -108,7 +108,7 @@ const handleCpuMove: ReducerActionHandler<ActionType.CPU_MOVE> = (
 
 const handleUsrMove: ReducerActionHandler<ActionType.USR_MOVE> = (
   gameState,
-  action
+  action,
 ) => {
   const didCpuPaddleHitBall = didPaddleHitBall(gameState.ballPosition, {
     x: gameState.cpuPosition,
@@ -126,7 +126,7 @@ const handleUsrMove: ReducerActionHandler<ActionType.USR_MOVE> = (
     gameState.usrPosition +
       MOVE_SPEED * (action.payload === Inset.LEFT ? -1 : 1),
     0,
-    1
+    1,
   );
 
   return {
@@ -142,7 +142,7 @@ const handleUsrMove: ReducerActionHandler<ActionType.USR_MOVE> = (
 };
 
 const handleCpuScore: ReducerActionHandler<ActionType.CPU_SCORE> = (
-  gameState
+  gameState,
 ) => ({
   ...gameState,
   goals: [...gameState.goals, { ballPosition: gameState.ballPosition }],
@@ -159,7 +159,7 @@ const handleCpuScore: ReducerActionHandler<ActionType.CPU_SCORE> = (
 });
 
 const handleUsrScore: ReducerActionHandler<ActionType.USR_SCORE> = (
-  gameState
+  gameState,
 ) => ({
   ...gameState,
   goals: [...gameState.goals, { ballPosition: gameState.ballPosition }],
@@ -177,7 +177,7 @@ const handleUsrScore: ReducerActionHandler<ActionType.USR_SCORE> = (
 
 export function gameReducer(
   gameState: Game | null,
-  action: GameActions
+  action: GameActions,
 ): Game | null {
   if (!gameState) return INITIAL_GAME_STATE;
 

@@ -8,7 +8,7 @@ type AuthState = {
 const AUTH_STORAGE_KEY = "auth-storage-key";
 
 export function useAuthState(
-  defaultState?: AuthState
+  defaultState?: AuthState,
 ): UseUrlStateResult<AuthState> {
   const getLocationHash = useCallback(function getStorageValue() {
     return window.localStorage.getItem(AUTH_STORAGE_KEY) ?? "";

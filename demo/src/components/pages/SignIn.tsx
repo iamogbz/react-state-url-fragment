@@ -39,7 +39,7 @@ export function SignIn(): JSX.Element {
           return { success: false, error };
         }
       },
-    }
+    },
   );
 
   const onSubmit = React.useCallback(
@@ -48,7 +48,7 @@ export function SignIn(): JSX.Element {
       if (status.isSubmitting) return;
       actions.submit();
     },
-    [status.isSubmitting, actions]
+    [status.isSubmitting, actions],
   );
 
   return (

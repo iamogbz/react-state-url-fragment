@@ -16,7 +16,7 @@ export function TextInput({ control, style, ...inputProps }: TextInputProps) {
       e.preventDefault();
       control.set(e.target.value);
     },
-    [control]
+    [control],
   );
 
   return (

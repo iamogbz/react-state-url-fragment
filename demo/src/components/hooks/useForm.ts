@@ -40,7 +40,7 @@ const NoSubmissionHandlerError = new Error("No submit handler provided");
 
 function useForm<T extends SimpleFormFields>(
   fields: FormFields<T>,
-  handlers?: FormEventHandlers<T>
+  handlers?: FormEventHandlers<T>,
 ): UseFormResult<T> {
   const [isSubmitting, setIsSubmitting] = useState(false);
 
@@ -50,8 +50,8 @@ function useForm<T extends SimpleFormFields>(
         setIsSubmitting(true);
         const currentValues = Object.fromEntries(
           Object.entries(fields).map(
-            ([key, value]: ObjectEntry<typeof fields>) => [key, value.get()]
-          )
+            ([key, value]: ObjectEntry<typeof fields>) => [key, value.get()],
+          ),
         ) as FormSubmissionValues<T>;
         const result = await handlers?.submit?.(currentValues);
         return (
@@ -66,7 +66,7 @@ function useForm<T extends SimpleFormFields>(
         setIsSubmitting(false);
       }
     },
-    [fields, handlers]
+    [fields, handlers],
   );
 
   const actions = { submit };
@@ -82,9 +82,9 @@ export function useSimpleForm<T extends SimpleFormFields>(
     change?: (
       fieldName: keyof T,
       newValue: T[keyof T],
-      oldValue: T[keyof T]
+      oldValue: T[keyof T],
     ) => void;
-  }
+  },
 ): UseFormResult<T> {
   const [, updateCounter] = useCounter();
   const { change, ...handlers } = eventHandlers ?? {};
@@ -103,8 +103,8 @@ export function useSimpleForm<T extends SimpleFormFields>(
             },
           };
           return [key, formField];
-        })
-      ) as FormFields<T>
+        }),
+      ) as FormFields<T>,
   );
 
   return useForm(fields, handlers);

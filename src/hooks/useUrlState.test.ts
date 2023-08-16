@@ -30,7 +30,7 @@ describe("useUrlState", () => {
           getLocationHash: () => encodedState,
           handleDecodeError,
           setLocationHash,
-        })
+        }),
       );
 
       const [resultState] = result.current;
@@ -39,7 +39,7 @@ describe("useUrlState", () => {
       if (handleDecodeError) {
         expect(fallbackEmptyUrlState).toHaveBeenCalledTimes(1);
       }
-    }
+    },
   );
 
   it.each`
@@ -48,7 +48,7 @@ describe("useUrlState", () => {
     ${"next state is function"} | ${jest.fn(() => emptyUrlStateDecoded)}
   `("sets location hash to encoded state value", ({ nextStateAction }) => {
     const { result } = renderHook(() =>
-      useUrlState({ getLocationHash: () => urlStateEncoded, setLocationHash })
+      useUrlState({ getLocationHash: () => urlStateEncoded, setLocationHash }),
     );
     const [, setState] = result.current;
 

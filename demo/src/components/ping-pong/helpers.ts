@@ -12,7 +12,7 @@ import {
 
 export function didPaddleHitBall(
   ballPosition: Coords2D,
-  paddlePosition: Coords2D
+  paddlePosition: Coords2D,
 ) {
   const halfPaddleWidth = PaddleSize.WIDTH / BoardSize.WIDTH / 2;
   const paddleHeight = PaddleSize.HEIGHT / BoardSize.HEIGHT;
