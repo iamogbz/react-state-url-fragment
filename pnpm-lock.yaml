@@ -85,7 +85,7 @@ devDependencies:
     version: 29.6.2
   lint-staged:
     specifier: ^14.0.0
-    version: 14.0.0
+    version: 14.0.1
   lodash:
     specifier: ^4.17.21
     version: 4.17.21
@@ -5064,10 +5064,6 @@ packages:
     resolution: {integrity: sha512-jeC1axXpnb0/2nn/Y1LPuLdgXBLH7aDcHu4KEKfqw3CUhX7ZpfBSlPKyqXE6btIgEzfWtrX3/tyBCaCvXvMkOw==}
     dev: true
 
-  /colorette@2.0.19:
-    resolution: {integrity: sha512-3tlv/dIP7FWvj3BsbHrGLJ6l/oKh1O3TcgBqMn+yyCagOxc23fyzDS6HypQbgxWbkpDnf52p1LuR4eWDQ/K9WQ==}
-    dev: true
-
   /colorette@2.0.20:
     resolution: {integrity: sha512-IfEDxwoWIjkeXL1eXcDiow4UbKjhLdq6/EuSVR9GMN7KVH3r9gQ83e73hsz1Nd1T3ijd5xv1wcWRYO+D6kCI2w==}
     dev: true
@@ -9808,8 +9804,8 @@ packages:
     engines: {node: ^12.20.0 || ^14.13.1 || >=16.0.0}
     dev: true
 
-  /lint-staged@14.0.0:
-    resolution: {integrity: sha512-0tLf0pqZYkar/wu3nTctk4rVIG+d7PanDYv4/IQR4qwdqfQkTDziLRFnqMcLuLBTuUqmcLwsHPD2EjQ18d/oaA==}
+  /lint-staged@14.0.1:
+    resolution: {integrity: sha512-Mw0cL6HXnHN1ag0mN/Dg4g6sr8uf8sn98w2Oc1ECtFto9tvRF7nkXGJRbx8gPlHyoR0pLyBr2lQHbWwmUHe1Sw==}
     engines: {node: ^16.14.0 || >=18.0.0}
     hasBin: true
     dependencies:
@@ -14109,7 +14105,7 @@ packages:
     peerDependencies:
       webpack: ^4.0.0 || ^5.0.0
     dependencies:
-      colorette: 2.0.19
+      colorette: 2.0.20
       memfs: 3.4.10
       mime-types: 2.1.35
       range-parser: 1.2.1
@@ -14138,7 +14134,7 @@ packages:
       ansi-html-community: 0.0.8
       bonjour-service: 1.0.14
       chokidar: 3.5.3
-      colorette: 2.0.19
+      colorette: 2.0.20
       compression: 1.7.4
       connect-history-api-fallback: 2.0.0
       default-gateway: 6.0.3
