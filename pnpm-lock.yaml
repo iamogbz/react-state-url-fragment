@@ -101,6 +101,9 @@ devDependencies:
   react-router:
     specifier: ^6.15.0
     version: 6.15.0(react@18.2.0)
+  react-router-chart:
+    specifier: ^1.0.0
+    version: 1.0.0(react-router-dom@6.15.0)
   react-router-dom:
     specifier: ^6.15.0
     version: 6.15.0(react-dom@18.2.0)(react@18.2.0)
@@ -12084,6 +12087,14 @@ packages:
   /react-refresh@0.11.0:
     resolution: {integrity: sha512-F27qZr8uUqwhWZboondsPx8tnC3Ct3SxZA3V5WyEvujRyyNv0VYPhoBg1gZ8/MV5tubQp76Trw8lTv9hzRBa+A==}
     engines: {node: '>=0.10.0'}
+    dev: true
+
+  /react-router-chart@1.0.0(react-router-dom@6.15.0):
+    resolution: {integrity: sha512-h3z7Gur1n6SdLp0mUEnDk7zRJijtiZ3Alk8jFntKGRUOeYg0hUXNF1Sqw59rkqf9g+n1LqosGGfYRB7NpRIQtA==}
+    peerDependencies:
+      react-router-dom: '>=6.0.0'
+    dependencies:
+      react-router-dom: 6.15.0(react-dom@18.2.0)(react@18.2.0)
     dev: true
 
   /react-router-dom@6.15.0(react-dom@18.2.0)(react@18.2.0):

@@ -1,8 +1,8 @@
 import * as React from "react";
+import { $ } from "react-router-chart";
 
 import { Copy } from "../../constants";
 import { namedRoutes } from "../../routes";
-import { $ } from "../../utils/createNamedRoutes";
 import { Link } from "../buttons/Link";
 import { PingPong } from "../ping-pong/PingPong";
 import { AUTH_CONTAINER_STYLE } from "./constants";

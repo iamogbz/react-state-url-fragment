@@ -1,9 +1,9 @@
 import * as React from "react";
+import { $ } from "react-router-chart";
 import { useNavigate } from "react-router-dom";
 
 import { Copy } from "../../constants";
 import { namedRoutes } from "../../routes";
-import { $ } from "../../utils/createNamedRoutes";
 import { resolveTimeout } from "../../utils/resolveTimeout";
 import { Link } from "../buttons/Link";
 import { TextInput } from "../forms/TextInput";
