@@ -6,7 +6,7 @@ import { useUrlState } from "./useUrlState";
 describe("useUrlState", () => {
   const emptyUrlStateDecoded = {};
   const emptyUrlStateEncoded = "e30%3D";
-  const setLocationHash = jest.fn();
+  const onEncodedState = jest.fn();
   const fallbackEmptyUrlState = jest.fn(() => emptyUrlStateDecoded);
   const urlStateEncodedInvalid = "#!!invalid@!";
 
@@ -27,9 +27,9 @@ describe("useUrlState", () => {
 
       const { result } = renderHook(() =>
         useUrlState({
-          getLocationHash: () => encodedState,
+          getEncodedState: () => encodedState,
           handleDecodeError,
-          setLocationHash,
+          onEncodedState: onEncodedState,
         }),
       );
 
@@ -48,17 +48,20 @@ describe("useUrlState", () => {
     ${"next state is function"} | ${jest.fn(() => emptyUrlStateDecoded)}
   `("sets location hash to encoded state value", ({ nextStateAction }) => {
     const { result } = renderHook(() =>
-      useUrlState({ getLocationHash: () => urlStateEncoded, setLocationHash }),
+      useUrlState({
+        getEncodedState: () => urlStateEncoded,
+        onEncodedState: onEncodedState,
+      }),
     );
     const [, setState] = result.current;
 
-    expect(setLocationHash).not.toHaveBeenCalled();
+    expect(onEncodedState).not.toHaveBeenCalled();
     setState(nextStateAction);
     if (typeof nextStateAction === "function") {
       expect(nextStateAction).toHaveBeenCalledTimes(1);
       expect(nextStateAction).toHaveBeenLastCalledWith(urlStateDecoded);
     }
-    expect(setLocationHash).toHaveBeenCalledTimes(1);
-    expect(setLocationHash).toHaveBeenLastCalledWith(emptyUrlStateEncoded);
+    expect(onEncodedState).toHaveBeenCalledTimes(1);
+    expect(onEncodedState).toHaveBeenLastCalledWith(emptyUrlStateEncoded);
   });
 });

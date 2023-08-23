@@ -8,21 +8,21 @@ export type UseUrlStateResult<T> = [
 ];
 
 export function useUrlState<T>(props: {
-  setLocationHash(urlEncodedState: string): void;
-  getLocationHash(): string;
+  onEncodedState(urlEncodedState: string): void;
+  getEncodedState(): string;
   handleDecodeError?(urlEncodedState: string): T;
 }): UseUrlStateResult<T> {
-  const { getLocationHash, handleDecodeError, setLocationHash } = props;
+  const { getEncodedState, handleDecodeError, onEncodedState } = props;
 
   const state = useRef<T | null>(null);
   state.current = useMemo(() => {
-    const encodedState = getLocationHash();
+    const encodedState = getEncodedState();
     try {
       return urlDecode<T>(encodedState);
     } catch (e) {
       return handleDecodeError?.(encodedState) ?? null;
     }
-  }, [getLocationHash, handleDecodeError]);
+  }, [getEncodedState, handleDecodeError]);
 
   const setState: UseUrlStateResult<T>[1] = useCallback(
     function setState(nextStateAction) {
@@ -31,9 +31,9 @@ export function useUrlState<T>(props: {
           ? (nextStateAction as CallableFunction)(state.current)
           : nextStateAction;
       const hash = urlEncode(newState);
-      setLocationHash(hash);
+      onEncodedState(hash);
     },
-    [setLocationHash],
+    [onEncodedState],
   );
 
   return [state.current, setState];

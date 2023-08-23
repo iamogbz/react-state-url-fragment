@@ -8,15 +8,15 @@ type PageState = {
 export function usePageState<T = PageState>(
   defaultState?: T,
 ): UseUrlStateResult<T> {
-  const getLocationHash = useCallback(() => location.hash.substring(1), []);
-  const setLocationHash = useCallback((hash: string) => {
+  const getEncodedState = useCallback(() => location.hash.substring(1), []);
+  const onEncodedState = useCallback((hash: string) => {
     location.hash = hash;
   }, []);
   const handleDecodeError = defaultState && (() => defaultState);
 
   return useUrlState<T>({
-    getLocationHash,
+    getEncodedState,
     handleDecodeError,
-    setLocationHash,
+    onEncodedState,
   });
 }

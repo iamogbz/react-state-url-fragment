@@ -15,14 +15,14 @@ import { useCallback } from "react";
 import { useUrlState } from "react-state-url-fragment";
 
 export function usePageState<T>(defaultState?: T) {
-  const getLocationHash = useCallback(() => location.hash.substring(1), []);
-  const setLocationHash = useCallback((hash) => (location.hash = hash), []);
+  const getEncodedState = useCallback(() => location.hash.substring(1), []);
+  const onEncodedState = useCallback((hash) => (location.hash = hash), []);
   const handleDecodeError = defaultState && (() => defaultState);
 
   return useUrlState<T>({
-    getLocationHash,
+    getEncodedState,
     handleDecodeError,
-    setLocationHash,
+    onEncodedState,
   });
 }
 ```
