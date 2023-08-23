@@ -29,7 +29,8 @@ export function usePageState<T>(defaultState?: T) {
 
 ### Example
 
-<https://github.com/iamogbz/react-state-url-fragment/blob/93b12c825e0ea4975f6b05544a56b7af5826984e/demo/src/components/hooks/usePageState.ts#L1-L22>
+* [Multiple encoded states concurrenly](https://github.com/iamogbz/react-state-url-fragment/blob/HEAD/demo/src/components/pages/Account.tsx#L11-L24)
+* [Combine with other state management](https://github.com/iamogbz/react-state-url-fragment/blob/HEAD/demo/src/components/ping-pong/PingPong.tsx#L25-L29)
 
 ### [Demo][homepage]
 
