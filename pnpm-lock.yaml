@@ -22,7 +22,7 @@ devDependencies:
     version: 14.1.0(react-dom@18.2.0)(react@18.2.0)
   '@types/d3':
     specifier: ^7.4.0
-    version: 7.4.2
+    version: 7.4.3
   '@types/jest':
     specifier: ^29.5.3
     version: 29.5.8
@@ -3207,8 +3207,8 @@ packages:
       '@types/d3-selection': 3.0.3
     dev: true
 
-  /@types/d3@7.4.2:
-    resolution: {integrity: sha512-Y4g2Yb30ZJmmtqAJTqMRaqXwRawfvpdpVmyEYEcyGNhrQI/Zvkq3k7yE1tdN07aFSmNBfvmegMQ9Fe2qy9ZMhw==}
+  /@types/d3@7.4.3:
+    resolution: {integrity: sha512-lZXZ9ckh5R8uiFVt8ogUNf+pIrK4EsWrx2Np75WvF/eTpJ0FMHNhjXk8CKEx/+gpHbNQyJWehbFaTvqmHWB3ww==}
     dependencies:
       '@types/d3-array': 3.0.3
       '@types/d3-axis': 3.0.1
