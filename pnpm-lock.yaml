@@ -100,7 +100,7 @@ devDependencies:
     version: 18.2.0(react@18.2.0)
   react-router:
     specifier: ^6.15.0
-    version: 6.21.2(react@18.2.0)
+    version: 6.21.3(react@18.2.0)
   react-router-chart:
     specifier: ^1.0.0
     version: 1.0.0(react-router-dom@6.21.3)
