@@ -103,10 +103,10 @@ devDependencies:
     version: 6.23.1(react@18.3.1)
   react-router-chart:
     specifier: ^1.0.0
-    version: 1.0.0(react-router-dom@6.23.0)
+    version: 1.0.0(react-router-dom@6.23.1)
   react-router-dom:
     specifier: ^6.15.0
-    version: 6.23.0(react-dom@18.3.1)(react@18.3.1)
+    version: 6.23.1(react-dom@18.3.1)(react@18.3.1)
   react-scripts:
     specifier: ^5.0.1
     version: 5.0.1(@babel/plugin-syntax-flow@7.24.1)(@babel/plugin-transform-react-jsx@7.23.4)(eslint@8.57.0)(react@18.3.1)(typescript@5.4.5)
@@ -12102,25 +12102,25 @@ packages:
     engines: {node: '>=0.10.0'}
     dev: true
 
-  /react-router-chart@1.0.0(react-router-dom@6.23.0):
+  /react-router-chart@1.0.0(react-router-dom@6.23.1):
     resolution: {integrity: sha512-h3z7Gur1n6SdLp0mUEnDk7zRJijtiZ3Alk8jFntKGRUOeYg0hUXNF1Sqw59rkqf9g+n1LqosGGfYRB7NpRIQtA==}
     peerDependencies:
       react-router-dom: '>=6.0.0'
     dependencies:
-      react-router-dom: 6.23.0(react-dom@18.3.1)(react@18.3.1)
+      react-router-dom: 6.23.1(react-dom@18.3.1)(react@18.3.1)
     dev: true
 
-  /react-router-dom@6.23.0(react-dom@18.3.1)(react@18.3.1):
-    resolution: {integrity: sha512-Q9YaSYvubwgbal2c9DJKfx6hTNoBp3iJDsl+Duva/DwxoJH+OTXkxGpql4iUK2sla/8z4RpjAm6EWx1qUDuopQ==}
+  /react-router-dom@6.23.1(react-dom@18.3.1)(react@18.3.1):
+    resolution: {integrity: sha512-utP+K+aSTtEdbWpC+4gxhdlPFwuEfDKq8ZrPFU65bbRJY+l706qjR7yaidBpo3MSeA/fzwbXWbKBI6ftOnP3OQ==}
     engines: {node: '>=14.0.0'}
     peerDependencies:
       react: '>=16.8'
       react-dom: '>=16.8'
     dependencies:
-      '@remix-run/router': 1.16.0
+      '@remix-run/router': 1.16.1
       react: 18.3.1
       react-dom: 18.3.1(react@18.3.1)
-      react-router: 6.23.0(react@18.3.1)
+      react-router: 6.23.1(react@18.3.1)
     dev: true
 
   /react-router@6.23.0(react@18.3.1):
